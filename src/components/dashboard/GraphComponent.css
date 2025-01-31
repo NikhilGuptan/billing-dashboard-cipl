@@ -1,0 +1,47 @@
+/* GraphComponent.css */
+
+/* Graph container */
+.graph-card {
+    width: 48%; /* Reducing the width of the pie chart by using 48% width */
+    margin-bottom: 20px; /* Space between graphs vertically */
+    border: 1px solid #CED4DA;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    max-height: 300px;
+}
+
+.graph-card h3 {
+    background-color: #DEEBFF;
+    color: #484848;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Pie Chart Specific Style */
+.pie-chart-container {
+    height: 200px; /* Adjusting the pie chart's height */
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Bar Chart Specific Style */
+.bar-chart-container {
+    height: 200px; /* Adjusting the bar chart's height */
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Graph title styling */
+.graph-card h3 {
+    background-color: #DEEBFF;
+    color: #484848;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+}

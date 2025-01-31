@@ -1,71 +1,80 @@
 .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #f4f7fc;
-    margin-top: 10px;
-    border-radius: 10px;
-  }
-  
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;  
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .dashboard-header h1 {
-    color: #2461C4;
-    margin: 0; 
-  }
-  
-  .dropdown {
-    display: flex;
-    align-items: center;
-  }
-  
-  .action-dropdown {
-    background-color: #2461C4;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-left: 10px;
-  }
-  
-  .dropdown-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px;
-  }
-  
-  .year-dropdown {
-    background-color: white;
-    color: #2461C4;
-    border: 1px solid #2461C4;
-    padding: 5px 10px;
-    border-radius: 5px;
-    width: auto;
-  }
-  
-  .graph-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
-    border: 1px dashed #2461C4;
-    border-radius: 10px;
-  }
-  
-  .graph-placeholder {
-    font-size: 20px;
-    color: #2461C4;
-    font-weight: 600;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f4f7fc;
+  margin-top: 10px;
+  border-radius: 10px;
+}
 
-  .graph-row{
-    width: 100%;
-    display: flex;
-    justify-content: space-between; 
-  }
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+  color: #2461C4;
+  margin: 0;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.action-dropdown {
+  background-color: #2461C4;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.dropdown-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.year-dropdown {
+  background-color: white;
+  color: #2461C4;
+  border: 1px solid #2461C4;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: auto;
+}
+
+.graph-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between graphs in the same row */
+  margin-bottom: 20px; /* Space between rows of graphs */
+}
+
+.graph-card {
+  width: 48%; /* Each graph takes 48% of the row */
+  margin-bottom: 20px; /* Space between graphs vertically */
+  border: 1px solid #CED4DA;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+}
+
+.graph-card h3 {
+  background-color: #DEEBFF;
+  color: #484848;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0;
+  text-align: center;
+}
+
+.graph-placeholder {
+  font-size: 20px;
+  color: #2461C4;
+  font-weight: 600;
+}

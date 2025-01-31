@@ -21,7 +21,7 @@ function NavBar() {
                 <div className="vertical-line"></div>
                 <p className="navbar-text">Nishant Garg</p>
                 <div className="vertical-line"></div>
-                <img src={UserIcon} alt="UserIcon" />
+                <img src={UserIcon} alt="UserIcon" style={{cursor:"pointer"}} />
             </div>
         </div>
     );

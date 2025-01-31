@@ -41,6 +41,7 @@
   .navbar-icon {
     font-size: 20px;
     color: #878787;
+    cursor: pointer;
   }
   
   .vertical-line {

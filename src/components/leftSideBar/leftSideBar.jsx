@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveTab } from "../../store/leftSideBarSlice";
 import "./LeftSideBar.css";
 import CIPLIQ from "../../images/cipl iq.svg";
 import { leftSideBarTabs } from "./leftSideBar.helper";
 
 function LeftSideBar() {
-  const [activeTab, setActiveTab] = useState("Dashboard");
-
+  const dispatch = useDispatch();
+  const activeTab = useSelector((state) => state.leftSideBar.activeTab); 
   return (
     <div className="sidebar">
       <img src={CIPLIQ} alt="Logo" className="sidebar-logo" />
@@ -16,7 +18,7 @@ function LeftSideBar() {
           <div
             key={index}
             className={`sidebar-item ${activeTab === tab.name ? "active" : ""}`}
-            onClick={() => setActiveTab(tab.name)}
+            onClick={() => dispatch(setActiveTab(tab.name))}  // Dispatch the action to set active tab
           >
             {tab.icon}
             <p>{tab.name}</p>

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LeftSideBar from "./components/leftSideBar/leftSideBar";
 import NavBar from "./components/navBar/navBar";
 import "./App.css";
-import DashboardComponent from "./components/dashboardComponent";
+import DashboardComponent from "./components/dashboard/dashboardComponent";
 
 function App() {
   return (
@@ -13,9 +13,11 @@ function App() {
         <div className="main-content">
           <NavBar />
           <Routes>
-            <Route path="/" element={<DashboardComponent/>} />
-            <Route path="/reports" element={<h1>Reports</h1>} />
-            <Route path="/billing" element={<h1>Billing Estimates</h1>} />
+            <Route path="/" element={<DashboardComponent />} />
+            {/* <Route path="/reports" element={<ReportsComponent />} />
+            <Route path="/billing" element={<BillingComponent />} />
+            <Route path="/projected-charges" element={<ProjectedChargesComponent />} />
+            <Route path="/capacity" element={<CapacityComponent />} /> */}
           </Routes>
         </div>
       </div>

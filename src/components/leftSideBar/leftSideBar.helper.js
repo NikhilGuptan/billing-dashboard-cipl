@@ -1,0 +1,5 @@
+
+
+const leftSideBarTabs = [
+    {name:"",component:""}
+]

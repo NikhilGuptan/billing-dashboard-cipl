@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import "./LeftSideBar.css";
 import CIPLIQ from "../../images/cipl iq.svg";
-import { RiDashboardLine } from "react-icons/ri";
-import { TbReport } from "react-icons/tb";
-import { LuReceiptIndianRupee } from "react-icons/lu";
-
-const leftSideBarTabs = [
-  { name: "Dashboard", icon: <RiDashboardLine /> },
-  { name: "Projected Charges", icon: <RiDashboardLine /> },
-  { name: "Reports", icon: <TbReport /> },
-  { name: "Capacity", icon: <RiDashboardLine /> },
-  { name: "Billing Estimates", icon: <LuReceiptIndianRupee /> },
-];
+import { leftSideBarTabs } from "./leftSideBar.helper";
 
 function LeftSideBar() {
   const [activeTab, setActiveTab] = useState("Dashboard");

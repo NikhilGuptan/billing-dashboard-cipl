@@ -14,7 +14,7 @@
 
 .sidebar-title {
     color: #484848;
-    font-weight: 700; /* Thicker text */
+    font-weight: 700; 
     font-size: 18px;
     margin-bottom: 5px;
 }
@@ -27,8 +27,8 @@
 .sidebar-item {
     display: flex;
     align-items: center;
-    gap: 4px; /* Reduced space between icon and text */
-    padding: 3px 6px; /* Reduced padding to minimize overall height */
+    gap: 4px;
+    padding: 3px 6px;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease;

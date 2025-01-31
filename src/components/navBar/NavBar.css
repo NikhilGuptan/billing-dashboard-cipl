@@ -1,0 +1,58 @@
+/* Navbar Container */
+.navbar {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 98%;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  /* Left side - Hamburger menu and title */
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .hamburger-icon {
+    border: 2px solid white;
+    background-color: #2461C4;
+    padding: 8px;
+    border-radius: 20%;
+  }
+  
+  .hamburger-menu {
+    color: white;
+    font-size: 20px;
+  }
+  
+  .navbar-title {
+    margin: 0;
+    color: #484848; /* Changed text color */
+  }
+  
+  /* Right side - Icons and Avatar */
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .navbar-icon {
+    font-size: 20px;
+    color: #878787; /* Changed icon color */
+  }
+  
+  .vertical-line {
+    border-left: 1px solid #878787; /* Changed line color */
+    height: 24px;
+  }
+  
+  .navbar-text {
+    margin: 0;
+    color: #878787; /* Changed text color */
+  }
+  

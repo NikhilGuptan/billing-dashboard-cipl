@@ -1,0 +1,16 @@
+.footer {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: sticky;
+    bottom: 0;
+    width: 98%;
+    font-size: 14px;
+    color: #484848;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for elevation */
+    border-radius: 10px;
+}
+
+.footer p{
+    margin: 0;
+}

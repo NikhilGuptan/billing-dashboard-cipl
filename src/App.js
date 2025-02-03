@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import LeftSideBar from "./components/leftSideBar/leftSideBar";
 import NavBar from "./components/navBar/navBar";
 import Footer from "./components/footer/Footer";
@@ -10,6 +10,7 @@ import ProjectChargesComponent from "./components/projectCharges/ProjectChargesC
 function App() {
   return (
     <Router>
+      <RedirectToHome />
       <div className="body">
         <LeftSideBar />
         <div className="main-content">
@@ -23,6 +24,18 @@ function App() {
       </div>
     </Router>
   );
+}
+
+function RedirectToHome() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.location.pathname !== "/") {
+      navigate("/", { replace: true });
+    }
+  }, []);
+
+  return null;
 }
 
 export default App;

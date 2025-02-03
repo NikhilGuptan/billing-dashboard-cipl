@@ -1,42 +1,45 @@
 import React from "react";
-import GraphComponent from "./GraphComponent"; // Import the GraphComponent
+import { Bar, Line, Pie } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, PointElement, LineElement, ArcElement } from "chart.js";
 import "./DashboardComponent.css";
+import GraphComponent from "./GraphComponent";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, PointElement, LineElement, ArcElement);
 
 function DashboardComponent() {
-  // Data for the graphs
-  const costOfResourceData = {
-    labels: ['Resource A', 'Resource B', 'Resource C'],
+  const costByProductData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
-        label: 'Cost of Resource',
-        data: [300, 150, 250],
-        backgroundColor: ['#BFE3F8', '#B3E5D6', '#F9C5B3'],
-      }
-    ]
+        label: "Cost by Product",
+        data: [2.5, 3.2, 3.1, 2.8, 0.9, 1.8, 1.7, 0.7, 0.2, 1.3, 0.9, 0.6],
+        backgroundColor: "#4A90E2",
+      },
+    ],
   };
 
-  const costByProductData = {
-    labels: ['Product A', 'Product B', 'Product C'],
+  const costByResourceData = {
+    labels: ["Switch", "Compute Solution", "Enterprise Storage", "Enterprise Backup"],
     datasets: [
       {
-        label: 'Cost by Product',
-        data: [500, 400, 700],
-        backgroundColor: '#2461C4',
-      }
-    ]
+        label: "Cost by Resource",
+        data: [40, 30, 20, 10],
+        backgroundColor: ["#FFCCBC", "#B3E5FC", "#C8E6C9", "#80DEEA"],
+      },
+    ],
   };
 
   const costByDayData = {
-    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [
       {
-        label: 'Cost by Day',
-        data: [50, 100, 150, 200, 250],
-        fill: false,
-        borderColor: '#2461C4',
-        tension: 0.1
-      }
-    ]
+        label: "Cost by Day",
+        data: [1.2, 1.4, 2.0, 1.8, 2.4, 2.6, 3.8, 2.9, 1.5, 1.8, 2.1, 2.3],
+        borderColor: "#4A90E2",
+        fill: true,
+        backgroundColor: "rgba(74,144,226,0.2)",
+      },
+    ],
   };
 
   return (
@@ -59,18 +62,13 @@ function DashboardComponent() {
           <option value="2023">2023</option>
         </select>
       </div>
-
-      {/* Graph Section */}
       <div className="graphs-container">
-        {/* First Row */}
-        <div className="graph-row">
-          <GraphComponent title="Cost of Resource" chartType="pie" data={costOfResourceData} />
-          <GraphComponent title="Cost by Product" chartType="bar" data={costByProductData} />
+        <div className="row">
+        <GraphComponent title="Cost by Resource" data={costByResourceData} type="pie" />
+          <GraphComponent title="Cost by Product" data={costByProductData} type="bar" />
         </div>
-
-        {/* Second Row */}
-        <div className="graph-row">
-          <GraphComponent title="Cost by Day" chartType="line" data={costByDayData} />
+        <div className="row single-row">
+          <GraphComponent title="Cost by Day" data={costByDayData} type="line" />
         </div>
       </div>
     </div>

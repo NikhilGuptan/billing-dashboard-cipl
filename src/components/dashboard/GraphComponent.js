@@ -1,68 +1,39 @@
-import React from 'react';
-import { Pie, Bar, Line } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale, BarElement, LineElement, PointElement } from 'chart.js';
+import { Bar, Line, Pie } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, PointElement, LineElement, ArcElement } from "chart.js";
+import "./DashboardComponent.css";
 
-// Import the CSS file for Graph component styles
-import './GraphComponent.css';
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, PointElement, LineElement, ArcElement);
 
-// Register Chart.js components
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement // Register the point element to resolve the error
-);
+const GraphComponent = ({ title, data, type }) => {
+  const chartTypes = { bar: Bar, line: Line, pie: Pie };
+  const ChartTag = chartTypes[type] || Bar;
 
-const GraphComponent = ({ title, chartType, data }) => {
-  let chart;
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: false,
+      tooltip: { enabled: true },
+    },
+  };
 
-  switch (chartType) {
-    case 'pie':
-      chart = (
-        <div className="pie-chart-container">
-          <Pie data={data} />
-        </div>
-      );
-      break;
-    case 'bar':
-      const barData = {
-        ...data,
-        datasets: data.datasets.map((dataset) => ({
-          ...dataset,
-          backgroundColor: '#BFE3F8', // Light blue color for the bars
-          borderColor: '#2461C4', // Color for the border of bars
-          barThickness: 12, // Make bars smaller
-        })),
-      };
-
-      chart = (
-        <div className="bar-chart-container">
-          <Bar data={barData} />
-        </div>
-      );
-      break;
-    case 'line':
-      chart = (
-        <div className="line-chart-container">
-          <Line data={data} />
-        </div>
-      );
-      break;
-    default:
-      chart = null;
+  if (type === "pie") {
+    options.plugins.datalabels = {
+      formatter: (value, context) => `${value}%`,
+      color: "#000",
+      font: { weight: "bold" },
+    };
   }
 
   return (
-    <div className="graph-card">
-      <h3>{title}</h3>
-      {chart}
+    <div className="graph-box">
+      <div className="graph-header">{title}</div>
+      <div className="graph-content">
+        <ChartTag data={data} options={options} />
+      </div>
     </div>
   );
 };
+
 
 export default GraphComponent;

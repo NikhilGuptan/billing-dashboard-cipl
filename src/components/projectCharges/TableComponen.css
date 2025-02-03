@@ -1,6 +1,9 @@
 .table-container {
   margin-top: 20px;
   border: 1px solid #CED4DA;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .table {
@@ -15,15 +18,23 @@
 }
 
 .table th {
+  position: relative;
   padding: 12px;
   text-align: left;
-  border-right: 2px solid #ccc;
 }
 
-.table th:last-child {
-  border-right: none;
+/* Vertical line effect between headers, centered */
+.table th:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 2px;
+  background-color: #ccc;
 }
 
+/* Adding space between headers */
 .table th:not(:last-child) {
   padding-right: 20px;
 }
@@ -35,7 +46,7 @@
 .table td {
   padding: 12px;
   text-align: left;
-  border-right: 2px solid #ccc;
+  /* border-right: 2px solid #ccc; */
 }
 
 .table td:last-child {
@@ -48,12 +59,7 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 0px;
+  margin-top: 0px;
   background-color: #4848481A;
   padding: 10px 10px;
-}
-
-.table-container {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
 }

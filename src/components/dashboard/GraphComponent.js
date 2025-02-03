@@ -19,7 +19,7 @@ const GraphComponent = ({ title, data, type }) => {
     }));
 
     // Define lighter colors
-    const lightColors = ["#FFCCBC", "#B3E5FC", "#C8E6C9", "#80DEEA"];
+    const lightColors = ["#FFDDC1", "#B3E5FC", "#C8E6C9", "#80DEEA"];
 
     return (
       <div className="graph-box">
@@ -58,6 +58,7 @@ const GraphComponent = ({ title, data, type }) => {
           <BarChart
             xAxis={[{ scaleType: "band", data: data.labels }]}
             series={[{ data: data.datasets[0].data, color: data.datasets[0].backgroundColor }]}
+            grid={{ horizontal: true }} // Add horizontal grid lines
             {...options}
           />
         </div>
@@ -79,6 +80,7 @@ const GraphComponent = ({ title, data, type }) => {
                 area: true, // Enables the area fill effect
               },
             ]}
+            grid={{ horizontal: true }} // Add horizontal grid lines
             {...options}
           />
         </div>

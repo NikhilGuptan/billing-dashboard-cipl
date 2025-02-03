@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProjectCharges.module.css";
+import TableComponent from "./TableComponent"; // Import the table component
 import GraphComponent from "../dashboard/GraphComponent";
 
 function ProjectChargesComponent() {
@@ -32,7 +33,7 @@ function ProjectChargesComponent() {
       <div className="dashboard-header">
         <h1 style={{ color: "#2461C4" }}>Dashboard</h1>
         <div className="dropdown">
-          <select className="action-dropdown">a
+          <select className="action-dropdown">
             <option value="">ACTIONS</option>
             <option value="action1">Action 1</option>
             <option value="action2">Action 2</option>
@@ -58,18 +59,20 @@ function ProjectChargesComponent() {
         </select>
       </div>
       <div className="graphs-container">
-      <div className="row">
+        <div className="row">
           <div className="graph-box">
-          <div className="graph-header">Charges</div>
-          <div className="graph-content">
-            <p>November ( 01/11/2024 - 22/11/2024)</p>
-            <p style={{color:"#2461C4",fontSize:"40px"}}>₹ 56,17,530.65</p>
-          </div>
+            <div className="graph-header">Charges</div>
+            <div className="graph-content">
+              <p>November ( 01/11/2024 - 22/11/2024)</p>
+              <p style={{ color: "#2461C4", fontSize: "40px" }}>₹ 56,17,530.65</p>
+            </div>
           </div>
           <GraphComponent title="Top charges" data={costByProductData} type="bar" />
           <GraphComponent title="Charges Over Time" data={costByDayData} type="line" />
         </div>
       </div>
+      {/* Add TableComponent here */}
+      <TableComponent />
     </div>
   );
 }

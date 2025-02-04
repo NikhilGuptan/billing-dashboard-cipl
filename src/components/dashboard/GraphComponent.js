@@ -26,6 +26,7 @@ const GraphComponent = ({ title, data, type }) => {
         <div className="graph-header">{title}</div>
         <div className="graph-content">
           <PieChart
+          colors={lightColors}
             series={[
               {
                 data: pieData,
@@ -33,7 +34,7 @@ const GraphComponent = ({ title, data, type }) => {
                 innerRadius: 10,
                 outerRadius: 120,
                 paddingAngle: 0,
-                colors: lightColors, // Apply light colors
+                // colors: lightColors, // Apply light colors
               },
             ]}
             sx={{

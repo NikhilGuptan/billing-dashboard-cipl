@@ -108,7 +108,9 @@
 .graph-header {
   background: #E3F2FD;
   padding: 10px;
-  font-weight: 400;
+  font-weight: 600;
+  color: #484848;
+  font-size: 18px;
   border-radius: 8px 8px 0 0;
 }
 

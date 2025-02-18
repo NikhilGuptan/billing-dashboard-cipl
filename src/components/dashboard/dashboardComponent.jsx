@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./DashboardComponent.css";
-import { barData, barDataStorage, deviceMasterMapping, months } from "./dashboard.helper";
+import { barData, barDataStorage, deviceMasterMapping, findMonth, months } from "./dashboard.helper";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import BarGraphComponent from "../graphs/BarGraph/BarGraphComponent";
+import { BASE_URL } from "../../Utils/Constants";
 
 const data = [
   { name: "Consumed", value: 30, color: "#FF0000" },
@@ -10,12 +12,26 @@ const data = [
 ];
 
 function DashboardComponent() {
-  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("feb");
   const [selectedDevicePrice, setSelectedDevicePrice] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
-  console.log("selectedMonth------->",selectedMonth)
-  console.log("selectedDevicePrice-----.",selectedDevicePrice)
-  console.log("---selectedDevice------->",selectedDevice);
+  const [totalCost, setTotalCost] = useState("0.00");
+
+  useEffect(() => {
+    fetchTotalCost();
+  }, [selectedMonth, selectedDevicePrice]);
+
+  const fetchTotalCost = async () => {
+    try {
+      const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
+      const url = selectedDevicePrice ? `${BASE_URL}/totalCost/${selectedDevicePrice}` : `${BASE_URL}/totalCost`;
+      const response = await axios.get(url, { params: { month: formattedMonth } });
+      setTotalCost(response.data?.totalCost || "0.00");
+    } catch (error) {
+      console.error("Error fetching total cost:", error);
+      setTotalCost("0.00");
+    }
+  };
 
   return (
     <div className="dashboard-container">
@@ -27,7 +43,6 @@ function DashboardComponent() {
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
           >
-            <option value="">Month</option>
             {months.map((month) => (
               <option key={month.value} value={month.value}>
                 {month.title}
@@ -56,7 +71,7 @@ function DashboardComponent() {
             </div>
           </div>
           <div className="total-cost">
-            <h2>₹ 1,23,456.54</h2>
+            <h2>₹ {totalCost}</h2>
           </div>
         </div>
         <div className="utilization-stats-container">

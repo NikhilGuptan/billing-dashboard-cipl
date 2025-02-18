@@ -1,120 +1,122 @@
 .dashboard-container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background-color: #f4f7fc;
+  background-color: white;
   margin-top: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 20px;
 }
 
 .dashboard-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-}
-
-.dashboard-header h1 {
-  color: #2461C4;
-  margin: 0;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .dropdown {
-  display: flex;
-  align-items: center;
-}
-
-.action-dropdown {
-  background-color: #2461C4;
-  color: white;
-  border: none;
-  padding: 8.5px 13px;
-  border-radius: 5px;
   margin-left: 10px;
 }
 
-.dropdown-container {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 20px;
+.filter-dropdown {
+  padding: 5px;
 }
 
-.year-dropdown {
-  background-color: white;
-  padding: 5px 30px;
-  border-radius: 5px;
-  width: auto;
-}
-
-.graph-row {
+/* Reduced size and no background color for Total Cost and Utilization Stats Sections */
+.dashboard-row {
   display: flex;
   justify-content: space-between;
-  gap: 20px; /* Space between graphs in the same row */
-  margin-bottom: 20px; /* Space between rows of graphs */
+  gap: 20px;
+  margin-top: 20px;
 }
 
-.graph-card {
-  width: 48%; /* Each graph takes 48% of the row */
-  margin-bottom: 20px; /* Space between graphs vertically */
-  border: 1px solid #CED4DA;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: white;
+.total-cost-container, .utilization-stats-container {
+  /* border-radius: 10px; */
+  width: 40%;  /* Reduced size even more */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* More prominent shadow */
 }
 
-.graph-card h3 {
-  background-color: #DEEBFF;
-  color: #484848;
+.title-bar {
+  background-color: #ADD8E6;  /* Light blue background for title */
+  color: white;
   padding: 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-bar h4 {
   margin: 0;
-  text-align: center;
+  font-size: 16px;
 }
 
-.graph-placeholder {
-  font-size: 20px;
-  color: #2461C4;
-  font-weight: 600;
+.total-cost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  font-weight: bold;
 }
 
-
-/* DashboardComponent.css */
-
-.dashboard-container {
-  width: 96%;
-  margin: auto;
-}
-
-.graphs-container {
+.pie-chart-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
 }
 
-.row {
+.chart-info {
   display: flex;
-  gap: 20px;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
 }
 
-.graph-box {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  /* padding: 20px; */
-  width: 45%;
+.consumed, .free {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.graph-header {
-  background: #E3F2FD;
-  padding: 10px;
-  font-weight: 600;
+.consumed-text, .free-text {
+  font-size: 14px;
   color: #484848;
-  font-size: 18px;
-  border-radius: 8px 8px 0 0;
 }
 
-.graph-content {
-  height: 300px;
-  padding: 20px;
+.consumed-percent, .free-percent {
+  font-size: 18px;
+}
+
+.consumed-percent {
+  color: #ADD8E6; /* Light blue color for consumed */
+}
+
+.free-percent {
+  color: #ADD8E6; /* Light blue color for free */
+}
+
+.total-stat {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #484848;
+}
+
+/* Adding space for pie chart */
+.pie-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.bar-graph-container {
+  width: 100%; /* Full width */
+  margin-top: 20px;
+}
+
+.bar-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }

@@ -8,13 +8,14 @@ import UserIcon from "../../images/user icon.svg";
 function NavBar() {
     return (
         <div className="navbar">
-            <div className="navbar-left">
+            {/* <div className="navbar-left">
                 <div>
                     <img src={humbergerIcon} alt="humbergerIcon" />
                 </div>
                 <p className="navbar-title">Consumption Intelligence</p>
-            </div>
-            <div className="navbar-right">
+            </div> */}
+            <p>Cost&Consumption Analytics</p>
+            {/* <div className="navbar-right">
                 <FaRegBell className="navbar-icon" />
                 <div className="vertical-line"></div>
                 <SiSunrise className="navbar-icon" />
@@ -22,7 +23,7 @@ function NavBar() {
                 <p className="navbar-text">Nishant Garg</p>
                 <div className="vertical-line"></div>
                 <img src={UserIcon} alt="UserIcon" style={{cursor:"pointer"}} />
-            </div>
+            </div> */}
         </div>
     );
 }

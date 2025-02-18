@@ -1,69 +1,114 @@
 import React from "react";
 import "./DashboardComponent.css";
-import GraphComponent from "./GraphComponent";
+import { months } from "./dashboard.helper";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"; // Import from recharts
+import { BarChart, Bar, XAxis, YAxis, Tooltip as BarTooltip, Legend as BarLegend, CartesianGrid } from "recharts"; // Import BarChart for the stacked bar graph
+
+const data = [
+  { name: "Consumed", value: 30, color: "#FF0000" }, // Red color for consumed
+  { name: "Free", value: 70, color: "#0000FF" }, // Blue color for free
+];
+
+// Example Data for the bar graph (Switch 1 to Switch 5)
+const barData = [
+  { name: "Switch 1", utilized: 4, total: 10 },
+  { name: "Switch 2", utilized: 6, total: 12 },
+  { name: "Switch 3", utilized: 5, total: 15 },
+  { name: "Switch 4", utilized: 7, total: 20 },
+  { name: "Switch 5", utilized: 8, total: 25 },
+];
+
 function DashboardComponent() {
-  const costByProductData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Cost by Product",
-        data: [2.5, 3.2, 3.1, 2.8, 0.9, 1.8, 1.7, 0.7, 0.2, 1.3, 0.9, 0.6],
-        backgroundColor: "#4A90E2",
-      },
-    ],
-  };
-
-  const costByResourceData = {
-    labels: ["Switch", "Compute Solution", "Enterprise Storage", "Enterprise Backup"],
-    datasets: [
-      {
-        label: "Cost by Resource",
-        data: [40, 30, 20, 10],
-        backgroundColor: ["#FFCCBC", "#B3E5FC", "#C8E6C9", "#80DEEA"],
-      },
-    ],
-  };
-
-  const costByDayData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-      {
-        label: "Cost by Day",
-        data: [1.2, 1.4, 2.0, 1.8, 2.4, 2.6, 3.8, 2.9, 1.5, 1.8, 2.1, 2.3],
-        borderColor: "#4A90E2",
-        fill: true,
-        backgroundColor: "rgba(74,144,226,0.2)",
-      },
-    ],
-  };
-
   return (
     <div className="dashboard-container">
+      {/* Dashboard Header */}
       <div className="dashboard-header">
-        <h1 style={{ color: "#2461C4" }}>Dashboard</h1>
+        <h3 style={{ marginRight: "auto" }}>Dashboard</h3>
         <div className="dropdown">
-          <select className="action-dropdown">
-            <option value="">ACTIONS</option>
-            <option value="action1">Action 1</option>
-            <option value="action2">Action 2</option>
+          <select className="filter-dropdown">
+            <option value="">All</option>
+            <option value="server">Server</option>
+            <option value="switch">Switch</option>
+            <option value="storage">Storage</option>
+          </select>
+        </div>
+        <div className="dropdown">
+          <select className="filter-dropdown">
+            <option value="">Month</option>
+            {months.map((month) => (
+              <option key={month.value} value={month.value}>
+                {month.title}
+              </option>
+            ))}
           </select>
         </div>
       </div>
 
-      <div className="dropdown-container">
-        <select className="year-dropdown">
-          <option value="">Last Year</option>
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
-        </select>
-      </div>
-      <div className="graphs-container">
-        <div className="row">
-        <GraphComponent title="Cost by Resource" data={costByResourceData} type="pie" />
-          <GraphComponent title="Cost by Product" data={costByProductData} type="bar" />
+      {/* Total Cost and Graph Section */}
+      <div className="dashboard-row">
+        {/* Total Cost Section */}
+        <div className="total-cost-container">
+          <div className="title-bar">
+            <h4>Total Cost</h4>
+          </div>
+          <div className="total-cost">
+            <h2>₹ 1,23,456.54</h2>
+          </div>
         </div>
-        <div className="row single-row">
-          <GraphComponent title="Cost by Day" data={costByDayData} type="line" />
+
+        {/* Utilization Stats Section */}
+        <div className="utilization-stats-container">
+          <div className="title-bar">
+            <h4>Utilization Stats</h4>
+            <div className="dropdown">
+              <select className="filter-dropdown">
+                <option value="server">Server</option>
+                <option value="switch">Switch</option>
+                <option value="storage">Storage</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Pie Chart */}
+          <div className="pie-chart-container">
+            <PieChart width={300} height={300}>
+              <Pie
+                data={data}
+                dataKey="value"
+                nameKey="name"
+                outerRadius={120}
+                fill="#8884d8"
+                label
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+            <div className="total-stat">
+              <span>Total: </span>30
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bar Graph Section */}
+      <div className="bar-graph-container">
+        <div className="title-bar">
+          <h4>Switch Consumption Stats</h4>
+        </div>
+        <div className="bar-chart-container">
+          <BarChart width={800} height={300} data={barData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <BarTooltip />
+            <BarLegend />
+            <Bar dataKey="utilized" stackId="a" fill="#FF0000" />
+            <Bar dataKey="total" stackId="a" fill="#0000FF" />
+          </BarChart>
         </div>
       </div>
     </div>

@@ -1,0 +1,21 @@
+.bar-graph-container {
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .title-bar {
+    background-color: #ADD8E6;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .bar-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

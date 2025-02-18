@@ -4,8 +4,7 @@ import { LuReceiptIndianRupee } from "react-icons/lu";
 
 export const leftSideBarTabs = [
   { name: "Dashboard", icon: <RiDashboardLine />, path: "/" },
-  { name: "Projected Charges", icon: <RiDashboardLine />, path: "/projected-charges" },
-  { name: "Reports", icon: <TbReport />, path: "/reports" },
-  { name: "Capacity", icon: <RiDashboardLine />, path: "/capacity" },
-  { name: "Billing Estimates", icon: <LuReceiptIndianRupee />, path: "/billing" },
+  { name: "Consumption Details", icon: <RiDashboardLine />, path: "/Consumption_details" },
+  { name: "Billing Summary", icon: <TbReport />, path: "/Billing_summary" },
+  { name: "Bill Forcasting", icon: <RiDashboardLine />, path: "/Bill_forcasting" },
 ];

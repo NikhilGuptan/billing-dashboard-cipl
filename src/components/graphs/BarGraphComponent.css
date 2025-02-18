@@ -1,16 +1,15 @@
 .bar-graph-container {
   background-color: white;
   margin-top: 10px;
-  border-radius: 5px;
-  padding: 20px;
+  /* width: 98%;/ */
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Add shadow to the bottom and right */
 }
 
 .title-bar {
-  background-color: #ADD8E6;
+  background-color: #79BEFC;
   color: white;
   padding: 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   text-align: center;
 }
 

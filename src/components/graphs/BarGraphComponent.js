@@ -1,7 +1,8 @@
 import React from "react";
+import "./BarGraphComponent.css"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 
-const BarGraphComponent = ({ title, data }) => {
+const BarGraphComponent = ({ title, data, dataKey1, dataKey2 }) => {
   return (
     <div className="bar-graph-container">
       <div className="title-bar">
@@ -9,14 +10,15 @@ const BarGraphComponent = ({ title, data }) => {
       </div>
       <div className="bar-chart-container">
         <BarChart width={500} height={300} data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          {/* Remove the matrix lines by setting stroke to none */}
+          <CartesianGrid stroke="none" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend />
-          {/* Reduced bar size */}
-          <Bar dataKey="utilized" stackId="a" fill="#FF0000" barSize={50} />
-          <Bar dataKey="total" stackId="a" fill="#0000FF" barSize={50} />
+          {/* Use dynamic dataKey for utilized and total */}
+          <Bar dataKey={dataKey1} stackId="a" fill={data[0]?.colorTop} barSize={50} />
+          <Bar dataKey={dataKey2} stackId="a" fill={data[0]?.colorBottom} barSize={50} />
         </BarChart>
       </div>
     </div>

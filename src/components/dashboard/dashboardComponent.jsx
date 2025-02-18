@@ -1,26 +1,12 @@
 import React from "react";
 import "./DashboardComponent.css";
-import { months } from "./dashboard.helper";
+import { barData, barDataStorage, deviceMasterMapping, months } from "./dashboard.helper";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import BarGraphComponent from "../graphs/BarGraph/BarGraphComponent";
 
 const data = [
   { name: "Consumed", value: 30, color: "#FF0000" },
   { name: "Free", value: 70, color: "#0000FF" },
-];
-
-const barData = [
-  { name: "Switch 1", utilized: 4, total: 10, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-  { name: "Switch 2", utilized: 6, total: 12, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-  { name: "Switch 3", utilized: 5, total: 15, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-  { name: "Switch 4", utilized: 7, total: 20, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-  { name: "Switch 5", utilized: 8, total: 25, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-];
-
-const barDataStorage = [
-  { name: "UNITY XT 680", utilized: 4, total: 10, colorTop: "#5585BF", colorBottom: "#C25553" },
-  { name: "POWER STORE 3200T", utilized: 6, total: 12, colorTop: "#5585BF", colorBottom: "#C25553" },
-  { name: "POWER SCALE F600", utilized: 5, total: 15, colorTop: "#5585BF", colorBottom: "#C25553" }
 ];
 
 function DashboardComponent() {
@@ -31,9 +17,11 @@ function DashboardComponent() {
         <div className="dropdown">
           <select className="filter-dropdown">
             <option value="">All</option>
-            <option value="server">Server</option>
-            <option value="switch">Switch</option>
-            <option value="storage">Storage</option>
+            {deviceMasterMapping.map((device) => {
+              return (
+                <option value={device?.deviceId}>{device?.value}</option>
+              )
+            })}
           </select>
         </div>
         <div className="dropdown">
@@ -61,9 +49,11 @@ function DashboardComponent() {
             <h4>Utilization Stats</h4>
             <div className="dropdown">
               <select className="filter-dropdown">
-                <option value="server">Server</option>
-                <option value="switch">Switch</option>
-                <option value="storage">Storage</option>
+                {deviceMasterMapping.map((device) => {
+                  return (
+                    <option value={device?.deviceId}>{device?.value}</option>
+                  )
+                })}
               </select>
             </div>
           </div>
@@ -91,11 +81,7 @@ function DashboardComponent() {
           </div>
         </div>
       </div>
-
-      {/* Use BarGraphComponent for Switch Consumption Stats */}
       <BarGraphComponent title="Switch Consumption Stats" data={barData} dataKey1="utilized" dataKey2="total" />
-
-      {/* Use BarGraphComponent for Storage Consumption Stats */}
       <BarGraphComponent title="Storage Consumption Stats" data={barDataStorage} dataKey1="utilized" dataKey2="total" />
     </div>
   );

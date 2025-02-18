@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DashboardComponent.css";
 import { barData, barDataStorage, deviceMasterMapping, months } from "./dashboard.helper";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
@@ -10,22 +10,23 @@ const data = [
 ];
 
 function DashboardComponent() {
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedDevicePrice, setSelectedDevicePrice] = useState("");
+  const [selectedDevice, setSelectedDevice] = useState("");
+  console.log("selectedMonth------->",selectedMonth)
+  console.log("selectedDevicePrice-----.",selectedDevicePrice)
+  console.log("---selectedDevice------->",selectedDevice);
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
         <h3 style={{ marginRight: "auto" }}>Dashboard</h3>
         <div className="dropdown">
-          <select className="filter-dropdown">
-            <option value="">All</option>
-            {deviceMasterMapping.map((device) => {
-              return (
-                <option value={device?.deviceId}>{device?.value}</option>
-              )
-            })}
-          </select>
-        </div>
-        <div className="dropdown">
-          <select className="filter-dropdown">
+          <select
+            className="filter-dropdown"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+          >
             <option value="">Month</option>
             {months.map((month) => (
               <option key={month.value} value={month.value}>
@@ -39,6 +40,20 @@ function DashboardComponent() {
         <div className="total-cost-container">
           <div className="title-bar">
             <h4>Total Cost</h4>
+            <div className="dropdown">
+              <select
+                className="filter-dropdown"
+                value={selectedDevicePrice}
+                onChange={(e) => setSelectedDevicePrice(e.target.value)}
+              >
+                <option value="">All</option>
+                {deviceMasterMapping.map((device) => (
+                  <option key={device.deviceId} value={device.deviceId}>
+                    {device.value}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div className="total-cost">
             <h2>₹ 1,23,456.54</h2>
@@ -48,12 +63,16 @@ function DashboardComponent() {
           <div className="title-bar">
             <h4>Utilization Stats</h4>
             <div className="dropdown">
-              <select className="filter-dropdown">
-                {deviceMasterMapping.map((device) => {
-                  return (
-                    <option value={device?.deviceId}>{device?.value}</option>
-                  )
-                })}
+              <select
+                className="filter-dropdown"
+                value={selectedDevice}
+                onChange={(e) => setSelectedDevice(e.target.value)}
+              >
+                {deviceMasterMapping.map((device) => (
+                  <option key={device.deviceId} value={device.deviceId}>
+                    {device.value}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

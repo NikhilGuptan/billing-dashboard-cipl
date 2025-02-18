@@ -17,7 +17,8 @@ function DashboardComponent() {
   const [selectedDevice, setSelectedDevice] = useState("");
   const [totalCost, setTotalCost] = useState("0.00");
   const [utilizationStats,setUtilizationStats] = useState(data);
-  console.log("utilizationStats---->",utilizationStats);
+  const [switchConsumptionStats,setSwitchConsumptionStats] =useState(barData);
+  console.log("switchConsumptionStats---->",switchConsumptionStats)
 
   useEffect(() => {
     fetchTotalCost();
@@ -26,6 +27,10 @@ function DashboardComponent() {
   useEffect(()=>{
     fetchUtilizationStats();
   },[selectedDevice,selectedMonth])
+
+  useEffect(()=>{
+    fetchSwitchConsumptionStats();
+  },[selectedMonth])
 
   const fetchTotalCost = async () => {
     try {
@@ -69,6 +74,55 @@ function DashboardComponent() {
       setUtilizationStats([]);
     }
   };
+
+  const fetchSwitchConsumptionStats = async () => {
+    try {
+      const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
+      const url = `${BASE_URL}/api/billing/switchUtilizationStats`;
+      const response = await axios.get(url, { params: { month: formattedMonth } });
+  
+      if (response?.data) {
+        const { leafSwitch, sanSwitch, utilizationStats } = response.data;
+  
+        // Transform response into required format
+        const updatedData = [
+          {
+            name: "Leaf Switch",
+            utilized: leafSwitch.portsUsed || 0,
+            total: leafSwitch.capacity || 0,
+            colorTop: "#2F7ED8",
+            colorBottom: "#8EE59C",
+          },
+          {
+            name: "SAN Switch",
+            utilized: sanSwitch.portsUsed || 0,
+            total: sanSwitch.capacity || 0,
+            colorTop: "#2F7ED8",
+            colorBottom: "#8EE59C",
+          },
+          {
+            name: "Utilization Stats",
+            utilized: utilizationStats.portsUsed || 0,
+            total: utilizationStats.capacity || 0,
+            colorTop: "#2F7ED8",
+            colorBottom: "#8EE59C",
+          },
+        ];
+  
+        // Check if at least one entry has nonzero utilized or total
+        const hasData = updatedData.some((item) => item.utilized > 0 || item.total > 0);
+  
+        // Store entire updatedData if there's at least one valid entry, otherwise store an empty array
+        setSwitchConsumptionStats(hasData ? updatedData : []);
+      } else {
+        setSwitchConsumptionStats([]);
+      }
+    } catch (error) {
+      console.error("Error fetching switch utilization stats:", error);
+      setSwitchConsumptionStats([]);
+    }
+  };
+  
   
 
   return (
@@ -153,7 +207,7 @@ function DashboardComponent() {
           </div>:<h2>No Data Found</h2>}
         </div>
       </div>
-      <BarGraphComponent title="Switch Consumption Stats" data={barData} dataKey1="utilized" dataKey2="total" />
+      <BarGraphComponent title="Switch Consumption Stats" data={switchConsumptionStats} dataKey1="utilized" dataKey2="total" />
       <BarGraphComponent title="Storage Consumption Stats" data={barDataStorage} dataKey1="utilized" dataKey2="total" />
     </div>
   );

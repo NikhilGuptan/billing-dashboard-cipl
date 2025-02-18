@@ -35,8 +35,6 @@ export const months = [
     { name: "Switch 1", utilized: 4, total: 10, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
     { name: "Switch 2", utilized: 6, total: 12, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
     { name: "Switch 3", utilized: 5, total: 15, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-    { name: "Switch 4", utilized: 7, total: 20, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-    { name: "Switch 5", utilized: 8, total: 25, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
   ];
   
   export const barDataStorage = [

@@ -5,6 +5,7 @@ import NavBar from "./components/navBar/navBar";
 import Footer from "./components/footer/Footer";
 import "./App.css";
 import DashboardComponent from "./components/dashboard/dashboardComponent";
+import ConsumptionDetails from "./components/consumptionDetails/consumptionDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<DashboardComponent />} />
+            <Route path="/Consumption_details" element={<ConsumptionDetails />} />
           </Routes>
           <Footer />
         </div>

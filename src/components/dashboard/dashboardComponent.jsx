@@ -2,7 +2,7 @@ import React from "react";
 import "./DashboardComponent.css";
 import { months } from "./dashboard.helper";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import BarGraphComponent from "../graphs/BarGraphComponent";
+import BarGraphComponent from "../graphs/BarGraph/BarGraphComponent";
 
 const data = [
   { name: "Consumed", value: 30, color: "#FF0000" },

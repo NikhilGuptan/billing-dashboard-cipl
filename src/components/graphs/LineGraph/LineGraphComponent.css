@@ -1,0 +1,37 @@
+/* .line-graph-container {
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 20px;
+  } */
+
+  .line-graph-container {
+    background-color: white;
+    margin-top: 10px;
+    /* width: 98%;/ */
+    border: .5px solid #CFCFCF; 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Add shadow to the bottom and right */
+  }
+  
+  .title-bar {
+    background-color: #79BEFC;
+    color: white;
+    padding: 10px;
+    /* border-radius: 5px; */
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .filter-dropdown {
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .line-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

@@ -18,15 +18,15 @@ export const months = [
 
 
   export const deviceMasterMapping = [
-    {deviceId:101,value:"Compute App Server"},
-    {deviceId:102,value:"SPINE Switch"},
-    {deviceId:103,value:"Leaf Switch"},
-    {deviceId:104,value:"SAN Switch"},
-    {deviceId:105,value:"Performance Storage - Block"},
-    {deviceId:106,value:"Performance Storage - File"},
-    {deviceId:107,value:"Capacity Storage File/ Block"},
-    {deviceId:108,value:"D2D Backup Device/Appliance"},
-    {deviceId:109,value:"Tape Backup Solution"},
+    {deviceId:1,value:"Compute App Server"},
+    {deviceId:2,value:"SPINE Switch"},
+    {deviceId:3,value:"Leaf Switch"},
+    {deviceId:4,value:"SAN Switch"},
+    {deviceId:5,value:"Performance Storage - Block"},
+    {deviceId:6,value:"Performance Storage - File"},
+    {deviceId:7,value:"Capacity Storage File/ Block"},
+    {deviceId:8,value:"D2D Backup Device/Appliance"},
+    {deviceId:9,value:"Tape Backup Solution"},
 
   ]
 

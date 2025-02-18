@@ -16,15 +16,21 @@ function DashboardComponent() {
   const [selectedDevicePrice, setSelectedDevicePrice] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("");
   const [totalCost, setTotalCost] = useState("0.00");
+  const [utilizationStats,setUtilizationStats] = useState(data);
+  console.log("utilizationStats---->",utilizationStats);
 
   useEffect(() => {
     fetchTotalCost();
   }, [selectedMonth, selectedDevicePrice]);
 
+  useEffect(()=>{
+    fetchUtilizationStats();
+  },[selectedDevice,selectedMonth])
+
   const fetchTotalCost = async () => {
     try {
       const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
-      const url = selectedDevicePrice ? `${BASE_URL}/totalCost/${selectedDevicePrice}` : `${BASE_URL}/totalCost`;
+      const url = selectedDevicePrice ? `${BASE_URL}/api/billing/totalCost/${selectedDevicePrice}` : `${BASE_URL}/api/billing/totalCost`;
       const response = await axios.get(url, { params: { month: formattedMonth } });
       setTotalCost(response.data?.totalCost || "0.00");
     } catch (error) {
@@ -32,6 +38,38 @@ function DashboardComponent() {
       setTotalCost("0.00");
     }
   };
+
+  const fetchUtilizationStats = async () => {
+    try {
+      const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
+      const url = `${BASE_URL}/api/billing/utilizationStats`;
+      const response = await axios.get(url, { params: { month: formattedMonth, deviceId: selectedDevice } });
+      
+      const { consumedGiB, totalCapacity } = response.data;
+  
+      // Calculate the Free data
+      const freeGiB = totalCapacity - consumedGiB;
+  
+      // Calculate the percentage
+      const consumedPercentage = ((consumedGiB / totalCapacity) * 100).toFixed(2);
+      const freePercentage = 100 - consumedPercentage;
+  
+      // Update the state with the new values
+      const updatedData = [
+        { name: "Consumed", value: consumedGiB, color: "#FF0000", percentage: consumedPercentage },
+        { name: "Free", value: freeGiB, color: "#0000FF", percentage: freePercentage },
+      ];
+  
+      // Update state
+      setUtilizationStats(updatedData);
+  
+      console.log("Updated Utilization Stats:", updatedData);
+    } catch (error) {
+      console.error("Error fetching utilization stats:", error);
+      setUtilizationStats([]);
+    }
+  };
+  
 
   return (
     <div className="dashboard-container">
@@ -92,17 +130,17 @@ function DashboardComponent() {
             </div>
           </div>
 
-          <div className="pie-chart-container">
+          {utilizationStats.length ? <div className="pie-chart-container">
             <PieChart width={300} height={300}>
               <Pie
-                data={data}
+                data={utilizationStats}
                 dataKey="value"
                 nameKey="name"
                 outerRadius={120}
                 fill="#8884d8"
                 label
               >
-                {data.map((entry, index) => (
+                {utilizationStats.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
@@ -112,7 +150,7 @@ function DashboardComponent() {
             <div className="total-stat">
               <span>Total: </span>30
             </div>
-          </div>
+          </div>:<h2>No Data Found</h2>}
         </div>
       </div>
       <BarGraphComponent title="Switch Consumption Stats" data={barData} dataKey1="utilized" dataKey2="total" />

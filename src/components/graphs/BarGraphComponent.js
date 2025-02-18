@@ -4,12 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "rec
 const BarGraphComponent = ({ title, data }) => {
   return (
     <div className="bar-graph-container">
-      {/* Dynamic Title */}
       <div className="title-bar">
         <h4>{title}</h4>
       </div>
-
-      {/* Bar Graph */}
       <div className="bar-chart-container">
         <BarChart width={500} height={300} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -17,8 +14,9 @@ const BarGraphComponent = ({ title, data }) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="bar1" stackId="a" fill="#8884d8" />
-          <Bar dataKey="bar2" stackId="a" fill="#82ca9d" />
+          {/* Reduced bar size */}
+          <Bar dataKey="utilized" stackId="a" fill="#FF0000" barSize={50} />
+          <Bar dataKey="total" stackId="a" fill="#0000FF" barSize={50} />
         </BarChart>
       </div>
     </div>

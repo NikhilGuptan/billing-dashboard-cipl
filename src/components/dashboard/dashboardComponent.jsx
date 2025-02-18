@@ -1,27 +1,31 @@
 import React from "react";
 import "./DashboardComponent.css";
 import { months } from "./dashboard.helper";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"; // Import from recharts
-import { BarChart, Bar, XAxis, YAxis, Tooltip as BarTooltip, Legend as BarLegend, CartesianGrid } from "recharts"; // Import BarChart for the stacked bar graph
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import BarGraphComponent from "../graphs/BarGraphComponent";
 
 const data = [
-  { name: "Consumed", value: 30, color: "#FF0000" }, // Red color for consumed
-  { name: "Free", value: 70, color: "#0000FF" }, // Blue color for free
+  { name: "Consumed", value: 30, color: "#FF0000" },
+  { name: "Free", value: 70, color: "#0000FF" },
 ];
 
-// Example Data for the bar graph (Switch 1 to Switch 5)
 const barData = [
-  { name: "Switch 1", utilized: 4, total: 10 },
-  { name: "Switch 2", utilized: 6, total: 12 },
-  { name: "Switch 3", utilized: 5, total: 15 },
-  { name: "Switch 4", utilized: 7, total: 20 },
-  { name: "Switch 5", utilized: 8, total: 25 },
+  { name: "Switch 1", utilized: 4, total: 10, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
+  { name: "Switch 2", utilized: 6, total: 12, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
+  { name: "Switch 3", utilized: 5, total: 15, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
+  { name: "Switch 4", utilized: 7, total: 20, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
+  { name: "Switch 5", utilized: 8, total: 25, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
+];
+
+const barDataStorage = [
+  { name: "UNITY XT 680", utilized: 4, total: 10 },
+  { name: "POWER STORE 3200T", utilized: 6, total: 12 },
+  { name: "POWER SCALE F600", utilized: 5, total: 15 }
 ];
 
 function DashboardComponent() {
   return (
     <div className="dashboard-container">
-      {/* Dashboard Header */}
       <div className="dashboard-header">
         <h3 style={{ marginRight: "auto" }}>Dashboard</h3>
         <div className="dropdown">
@@ -43,10 +47,7 @@ function DashboardComponent() {
           </select>
         </div>
       </div>
-
-      {/* Total Cost and Graph Section */}
       <div className="dashboard-row">
-        {/* Total Cost Section */}
         <div className="total-cost-container">
           <div className="title-bar">
             <h4>Total Cost</h4>
@@ -55,8 +56,6 @@ function DashboardComponent() {
             <h2>₹ 1,23,456.54</h2>
           </div>
         </div>
-
-        {/* Utilization Stats Section */}
         <div className="utilization-stats-container">
           <div className="title-bar">
             <h4>Utilization Stats</h4>
@@ -69,7 +68,6 @@ function DashboardComponent() {
             </div>
           </div>
 
-          {/* Pie Chart */}
           <div className="pie-chart-container">
             <PieChart width={300} height={300}>
               <Pie
@@ -94,23 +92,11 @@ function DashboardComponent() {
         </div>
       </div>
 
-      {/* Bar Graph Section */}
-      <div className="bar-graph-container">
-        <div className="title-bar">
-          <h4>Switch Consumption Stats</h4>
-        </div>
-        <div className="bar-chart-container">
-          <BarChart width={800} height={300} data={barData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <BarTooltip />
-            <BarLegend />
-            <Bar dataKey="utilized" stackId="a" fill="#FF0000" />
-            <Bar dataKey="total" stackId="a" fill="#0000FF" />
-          </BarChart>
-        </div>
-      </div>
+      {/* Use BarGraphComponent for Switch Consumption Stats */}
+      <BarGraphComponent title="Switch Consumption Stats" data={barData} />
+
+      {/* Use BarGraphComponent for Storage Consumption Stats */}
+      <BarGraphComponent title="Storage Consumption Stats" data={barDataStorage} />
     </div>
   );
 }

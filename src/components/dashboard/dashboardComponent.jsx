@@ -18,9 +18,9 @@ const barData = [
 ];
 
 const barDataStorage = [
-  { name: "UNITY XT 680", utilized: 4, total: 10, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-  { name: "POWER STORE 3200T", utilized: 6, total: 12, colorTop: "#2F7ED8", colorBottom: "#8EE59C" },
-  { name: "POWER SCALE F600", utilized: 5, total: 15, colorTop: "#2F7ED8", colorBottom: "#8EE59C" }
+  { name: "UNITY XT 680", utilized: 4, total: 10, colorTop: "#5585BF", colorBottom: "#C25553" },
+  { name: "POWER STORE 3200T", utilized: 6, total: 12, colorTop: "#5585BF", colorBottom: "#C25553" },
+  { name: "POWER SCALE F600", utilized: 5, total: 15, colorTop: "#5585BF", colorBottom: "#C25553" }
 ];
 
 function DashboardComponent() {

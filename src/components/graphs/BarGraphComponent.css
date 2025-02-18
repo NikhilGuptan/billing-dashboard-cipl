@@ -2,6 +2,7 @@
   background-color: white;
   margin-top: 10px;
   /* width: 98%;/ */
+  border: .5px solid #CFCFCF; 
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Add shadow to the bottom and right */
 }
 

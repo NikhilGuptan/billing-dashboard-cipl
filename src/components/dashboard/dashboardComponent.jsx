@@ -7,8 +7,8 @@ import BarGraphComponent from "../graphs/BarGraph/BarGraphComponent";
 import { BASE_URL, SWITCHUTILIZATIONSTATUS_API, UTILIZATIONSTATUS_API } from "../../Utils/Constants";
 
 const data = [
-  { name: "Consumed", value: 30, color: "#FF0000" },
-  { name: "Free", value: 70, color: "#0000FF" },
+  { name: "Consumed", value: 30, color: "#E60049" },
+  { name: "Free", value: 70, color: "#0997D6" },
 ];
 
 function DashboardComponent() {
@@ -60,8 +60,8 @@ function DashboardComponent() {
       const consumedPercentage = ((consumedGiB / totalCapacity) * 100).toFixed(2);
       const freePercentage = 100 - consumedPercentage;
       const updatedData = [
-        { name: "Consumed", value: consumedGiB, color: "#FF0000", percentage: consumedPercentage },
-        { name: "Free", value: freeGiB, color: "#0000FF", percentage: freePercentage },
+        { name: "Consumed", value: consumedGiB, color: "#E60049", percentage: consumedPercentage },
+        { name: "Free", value: freeGiB, color: "#0997D6", percentage: freePercentage },
       ];
       setUtilizationStats(updatedData);
     } catch (error) {

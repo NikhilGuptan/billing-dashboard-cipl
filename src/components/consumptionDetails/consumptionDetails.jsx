@@ -75,12 +75,12 @@ function ConsumptionDetails() {
 
       {/* LineGraphComponent integration */}
       <LineGraphComponent
-        title="Consumption by Device"
+        title="Consumption by Category"
         data={lineData}
         dataKeys={lineKeys}
         dropdownOptions={dropdownOptions} // Optional dropdown
       />
-    <TableComponent title="Employee Details" columns={columns} data={data} />
+    <TableComponent title="Consumption Details" columns={columns} data={data} />
     </div>
   );
 }

@@ -51,3 +51,33 @@ export const months = [
       }
     }
   }
+
+
+
+  export function findSwitchConsumptionData(leafSwitch, sanSwitch, utilizationStats){
+    const updatedData = [
+      {
+        name: "Leaf Switch",
+        utilized: leafSwitch.portsUsed || 0,
+        total: leafSwitch.capacity || 0,
+        colorTop: "#2F7ED8",
+        colorBottom: "#8EE59C",
+      },
+      {
+        name: "SAN Switch",
+        utilized: sanSwitch.portsUsed || 0,
+        total: sanSwitch.capacity || 0,
+        colorTop: "#2F7ED8",
+        colorBottom: "#8EE59C",
+      },
+      {
+        name: "Utilization Stats",
+        utilized: utilizationStats.portsUsed || 0,
+        total: utilizationStats.capacity || 0,
+        colorTop: "#2F7ED8",
+        colorBottom: "#8EE59C",
+      },
+    ];
+
+    return updatedData;
+  }

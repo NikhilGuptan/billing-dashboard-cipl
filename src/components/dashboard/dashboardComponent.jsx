@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./DashboardComponent.css";
-import { barData, barDataStorage, deviceMasterMapping, findMonth, months } from "./dashboard.helper";
+import { barData, barDataStorage, deviceMasterMapping, findMonth, findSwitchConsumptionData, months } from "./dashboard.helper";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import BarGraphComponent from "../graphs/BarGraph/BarGraphComponent";
-import { BASE_URL } from "../../Utils/Constants";
+import { BASE_URL, SWITCHUTILIZATIONSTATUS_API, UTILIZATIONSTATUS_API } from "../../Utils/Constants";
 
 const data = [
   { name: "Consumed", value: 30, color: "#FF0000" },
@@ -14,23 +14,22 @@ const data = [
 function DashboardComponent() {
   const [selectedMonth, setSelectedMonth] = useState("feb");
   const [selectedDevicePrice, setSelectedDevicePrice] = useState("");
-  const [selectedDevice, setSelectedDevice] = useState("");
+  const [selectedDevice, setSelectedDevice] = useState("1");
   const [totalCost, setTotalCost] = useState("0.00");
-  const [utilizationStats,setUtilizationStats] = useState(data);
-  const [switchConsumptionStats,setSwitchConsumptionStats] =useState(barData);
-  console.log("switchConsumptionStats---->",switchConsumptionStats)
+  const [utilizationStats, setUtilizationStats] = useState(data);
+  const [switchConsumptionStats, setSwitchConsumptionStats] = useState(barData);
 
   useEffect(() => {
     fetchTotalCost();
   }, [selectedMonth, selectedDevicePrice]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchUtilizationStats();
-  },[selectedDevice,selectedMonth])
+  }, [selectedDevice, selectedMonth])
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchSwitchConsumptionStats();
-  },[selectedMonth])
+  }, [selectedMonth])
 
   const fetchTotalCost = async () => {
     try {
@@ -47,9 +46,7 @@ function DashboardComponent() {
   const fetchUtilizationStats = async () => {
     try {
       const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
-      const url = `${BASE_URL}/api/billing/utilizationStats`;
-      const response = await axios.get(url, { params: { month: formattedMonth, deviceId: selectedDevice } });
-      
+      const response = await axios.get(UTILIZATIONSTATUS_API, { params: { month: formattedMonth, deviceId: selectedDevice } }); 
       const { consumedGiB, totalCapacity } = response.data;
       const freeGiB = totalCapacity - consumedGiB;
       const consumedPercentage = ((consumedGiB / totalCapacity) * 100).toFixed(2);
@@ -69,34 +66,11 @@ function DashboardComponent() {
   const fetchSwitchConsumptionStats = async () => {
     try {
       const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
-      const url = `${BASE_URL}/api/billing/switchUtilizationStats`;
-      const response = await axios.get(url, { params: { month: formattedMonth } });
-  
+      const response = await axios.get(SWITCHUTILIZATIONSTATUS_API, { params: { month: formattedMonth } });
+
       if (response?.data) {
         const { leafSwitch, sanSwitch, utilizationStats } = response.data;
-        const updatedData = [
-          {
-            name: "Leaf Switch",
-            utilized: leafSwitch.portsUsed || 0,
-            total: leafSwitch.capacity || 0,
-            colorTop: "#2F7ED8",
-            colorBottom: "#8EE59C",
-          },
-          {
-            name: "SAN Switch",
-            utilized: sanSwitch.portsUsed || 0,
-            total: sanSwitch.capacity || 0,
-            colorTop: "#2F7ED8",
-            colorBottom: "#8EE59C",
-          },
-          {
-            name: "Utilization Stats",
-            utilized: utilizationStats.portsUsed || 0,
-            total: utilizationStats.capacity || 0,
-            colorTop: "#2F7ED8",
-            colorBottom: "#8EE59C",
-          },
-        ];
+        const updatedData = findSwitchConsumptionData(leafSwitch, sanSwitch, utilizationStats);
         const hasData = updatedData.some((item) => item.utilized > 0 || item.total > 0);
         setSwitchConsumptionStats(hasData ? updatedData : []);
       } else {
@@ -107,8 +81,8 @@ function DashboardComponent() {
       setSwitchConsumptionStats([]);
     }
   };
-  
-  
+
+
 
   return (
     <div className="dashboard-container">
@@ -189,7 +163,7 @@ function DashboardComponent() {
             <div className="total-stat">
               <span>Total: </span>30
             </div>
-          </div>:<h2>No Data Found</h2>}
+          </div> : <h2>No Data Found</h2>}
         </div>
       </div>
       <BarGraphComponent title="Switch Consumption Stats" data={switchConsumptionStats} dataKey1="utilized" dataKey2="total" />

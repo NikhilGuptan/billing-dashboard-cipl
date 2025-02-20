@@ -12,28 +12,36 @@ const data = [
 ];
 
 function DashboardComponent() {
-  const [selectedMonth, setSelectedMonth] = useState("feb");
+  const currentDate = new Date();
+  const currentMonthKey = currentDate.getMonth() + 1; // Get current month as a number (1-12)
+  const currentMonthValue = months.find(month => month.key === currentMonthKey)?.value || "jan";
+  const currentYear = currentDate.getFullYear();
+
+  const [selectedMonth, setSelectedMonth] = useState(currentMonthValue);
+  const [selectedYear, setSelectedYear] = useState(currentYear.toString());
   const [selectedDevicePrice, setSelectedDevicePrice] = useState("");
   const [selectedDevice, setSelectedDevice] = useState("1");
   const [totalCost, setTotalCost] = useState("0.00");
   const [utilizationStats, setUtilizationStats] = useState(data);
   const [switchConsumptionStats, setSwitchConsumptionStats] = useState(barData);
 
-  useEffect(() => {
+  const years = Array.from({ length: currentYear - 2025 + 1 }, (_, index) => (2025 + index).toString());
+
+   useEffect(() => {
     fetchTotalCost();
-  }, [selectedMonth, selectedDevicePrice]);
+  }, [selectedMonth, selectedYear, selectedDevicePrice]);
 
   useEffect(() => {
     fetchUtilizationStats();
-  }, [selectedDevice, selectedMonth])
+  }, [selectedDevice, selectedMonth, selectedYear]);
 
   useEffect(() => {
     fetchSwitchConsumptionStats();
-  }, [selectedMonth])
+  }, [selectedMonth, selectedYear]);
 
   const fetchTotalCost = async () => {
     try {
-      const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
+      const formattedMonth = `${selectedYear}-0${findMonth(selectedMonth)}`;
       const url = selectedDevicePrice ? `${BASE_URL}/api/billing/totalCost/${selectedDevicePrice}` : `${BASE_URL}/api/billing/totalCost`;
       const response = await axios.get(url, { params: { month: formattedMonth } });
       setTotalCost(response.data?.totalCost || "0.00");
@@ -45,7 +53,7 @@ function DashboardComponent() {
 
   const fetchUtilizationStats = async () => {
     try {
-      const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
+      const formattedMonth = `${selectedYear}-0${findMonth(selectedMonth)}`;
       const response = await axios.get(UTILIZATIONSTATUS_API, { params: { month: formattedMonth, deviceId: selectedDevice } }); 
       const { consumedGiB, totalCapacity } = response.data;
       const freeGiB = totalCapacity - consumedGiB;
@@ -56,7 +64,6 @@ function DashboardComponent() {
         { name: "Free", value: freeGiB, color: "#0000FF", percentage: freePercentage },
       ];
       setUtilizationStats(updatedData);
-      console.log("Updated Utilization Stats:", updatedData);
     } catch (error) {
       console.error("Error fetching utilization stats:", error);
       setUtilizationStats([]);
@@ -65,7 +72,7 @@ function DashboardComponent() {
 
   const fetchSwitchConsumptionStats = async () => {
     try {
-      const formattedMonth = `2025-0${findMonth(selectedMonth)}`;
+      const formattedMonth = `${selectedYear}-0${findMonth(selectedMonth)}`;
       const response = await axios.get(SWITCHUTILIZATIONSTATUS_API, { params: { month: formattedMonth } });
 
       if (response?.data) {
@@ -88,6 +95,13 @@ function DashboardComponent() {
     <div className="dashboard-container">
       <div className="dashboard-header">
         <h3 style={{ marginRight: "auto" }}>Dashboard</h3>
+        <div className="dropdown">
+          <select className="filter-dropdown" value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
+            {years.map((year) => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
+        </div>
         <div className="dropdown">
           <select
             className="filter-dropdown"

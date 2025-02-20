@@ -51,23 +51,14 @@ function DashboardComponent() {
       const response = await axios.get(url, { params: { month: formattedMonth, deviceId: selectedDevice } });
       
       const { consumedGiB, totalCapacity } = response.data;
-  
-      // Calculate the Free data
       const freeGiB = totalCapacity - consumedGiB;
-  
-      // Calculate the percentage
       const consumedPercentage = ((consumedGiB / totalCapacity) * 100).toFixed(2);
       const freePercentage = 100 - consumedPercentage;
-  
-      // Update the state with the new values
       const updatedData = [
         { name: "Consumed", value: consumedGiB, color: "#FF0000", percentage: consumedPercentage },
         { name: "Free", value: freeGiB, color: "#0000FF", percentage: freePercentage },
       ];
-  
-      // Update state
       setUtilizationStats(updatedData);
-  
       console.log("Updated Utilization Stats:", updatedData);
     } catch (error) {
       console.error("Error fetching utilization stats:", error);
@@ -83,8 +74,6 @@ function DashboardComponent() {
   
       if (response?.data) {
         const { leafSwitch, sanSwitch, utilizationStats } = response.data;
-  
-        // Transform response into required format
         const updatedData = [
           {
             name: "Leaf Switch",
@@ -108,11 +97,7 @@ function DashboardComponent() {
             colorBottom: "#8EE59C",
           },
         ];
-  
-        // Check if at least one entry has nonzero utilized or total
         const hasData = updatedData.some((item) => item.utilized > 0 || item.total > 0);
-  
-        // Store entire updatedData if there's at least one valid entry, otherwise store an empty array
         setSwitchConsumptionStats(hasData ? updatedData : []);
       } else {
         setSwitchConsumptionStats([]);

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import { setActiveTab } from "../../store/leftSideBarSlice";
 import "./LeftSideBar.css";
 import CIPLIQ from "../../images/cipl iq.svg";
@@ -8,12 +8,12 @@ import { leftSideBarTabs } from "./leftSideBar.helper";
 
 function LeftSideBar() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
   const activeTab = useSelector((state) => state.leftSideBar.activeTab); 
 
   const handleTabClick = (tabName, path) => {
-    dispatch(setActiveTab(tabName));  // Dispatch the action to update active tab
-    navigate(path);  // Navigate to the selected route
+    dispatch(setActiveTab(tabName));  
+    navigate(path); 
   };
 
   return (
@@ -26,7 +26,7 @@ function LeftSideBar() {
           <div
             key={index}
             className={`sidebar-item ${activeTab === tab.name ? "active" : ""}`}
-            onClick={() => handleTabClick(tab.name, tab.path)}  // Handle the click and navigate
+            onClick={() => handleTabClick(tab.name, tab.path)}  
           >
             {tab.icon}
             <p>{tab.name}</p>

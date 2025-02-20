@@ -6,7 +6,6 @@
   }
   
   .title-bar {
-    /* background-color: #406bb8; */
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -15,7 +14,7 @@
   }
   
   .table-wrapper {
-    max-height: 400px; /* Fixed height for scroll */
+    max-height: 400px; 
     overflow-y: auto;
     border: 1px solid #cfcdcd;
     border-radius: 5px;

@@ -10,13 +10,11 @@ const BarGraphComponent = ({ title, data, dataKey1, dataKey2 }) => {
       </div>
       {data.length ? <div className="bar-chart-container">
         <BarChart width={500} height={300} data={data}>
-          {/* Remove the matrix lines by setting stroke to none */}
           <CartesianGrid stroke="none" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend />
-          {/* Use dynamic dataKey for utilized and total */}
           <Bar dataKey={dataKey1} stackId="a" fill={data[0]?.colorTop} barSize={50} />
           <Bar dataKey={dataKey2} stackId="a" fill={data[0]?.colorBottom} barSize={50} />
         </BarChart>

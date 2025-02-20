@@ -4,7 +4,6 @@ import { months } from "../dashboard/dashboard.helper";
 import LineGraphComponent from "../graphs/LineGraph/LineGraphComponent";
 import TableComponent from "../graphs/Table/TableComponent";
 
-// Sample data for line chart with dates and different lines
 const lineData = [
   { date: "02/05/2024", powerScale: 4000, powerStore: 2400, unityXT: 2400 },
   { date: "03/05/2024", powerScale: 3000, powerStore: 1398, unityXT: 2210 },
@@ -34,15 +33,12 @@ const data = [
   { ID: 13, Name: "Mia", Age: 25, Email: "mia@example.com", City: "San Diego", Department: "Support", Role: "Executive", Salary: "$4200" },
   { ID: 14, Name: "Nathan", Age: 34, Email: "nathan@example.com", City: "Portland", Department: "IT", Role: "Architect", Salary: "$6500" },
 ];
-
-// Data for lines (Keys and colors)
 const lineKeys = [
   { key: "powerScale", color: "#8884d8", label: "Power Scale" },
   { key: "powerStore", color: "#82ca9d", label: "Power Store" },
   { key: "unityXT", color: "#ff7300", label: "Unity XT" },
 ];
 
-// Dropdown options (optional)
 const dropdownOptions = [
   { label: "Option 1", value: "option1" },
   { label: "Option 2", value: "option2" },
@@ -73,12 +69,11 @@ function ConsumptionDetails() {
         </div>
       </div>
 
-      {/* LineGraphComponent integration */}
       <LineGraphComponent
         title="Consumption by Category"
         data={lineData}
         dataKeys={lineKeys}
-        dropdownOptions={dropdownOptions} // Optional dropdown
+        dropdownOptions={dropdownOptions} 
       />
     <TableComponent title="Consumption Details" columns={columns} data={data} />
     </div>

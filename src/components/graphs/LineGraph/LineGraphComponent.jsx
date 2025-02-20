@@ -21,7 +21,6 @@ const LineGraphComponent = ({ title, data, dataKeys, dropdownOptions }) => {
       </div>
       <div className="line-chart-container">
         <LineChart width={1000} height={300} data={data}>
-          {/* Remove the dotted grid lines */}
           <CartesianGrid stroke="transparent" />
           <XAxis dataKey="date" />
           <YAxis />
@@ -33,7 +32,7 @@ const LineGraphComponent = ({ title, data, dataKeys, dropdownOptions }) => {
               type="monotone"
               dataKey={line.key}
               stroke={line.color}
-              strokeWidth={3}  // Thicker lines
+              strokeWidth={3}
               activeDot={{ r: 8 }}
               name={line.label}
             />
